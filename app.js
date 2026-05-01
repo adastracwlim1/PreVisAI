@@ -1,119 +1,121 @@
-const demoStoryboardSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
-  <rect width="1200" height="760" fill="#f2efe7"/>
-  <g fill="none" stroke="#151821" stroke-width="10">
-    <rect x="54" y="60" width="328" height="280"/>
-    <rect x="436" y="60" width="328" height="280"/>
-    <rect x="818" y="60" width="328" height="280"/>
-    <rect x="54" y="420" width="1092" height="250"/>
-  </g>
-  <g stroke="#151821" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M112 260 C170 190 252 185 324 250" fill="none" stroke-width="8"/>
-    <path d="M160 268 L210 155 L266 268" fill="none" stroke-width="8"/>
-    <circle cx="215" cy="125" r="31" fill="none" stroke-width="8"/>
-    <path d="M492 286 L588 142 L694 286" fill="none" stroke-width="8"/>
-    <path d="M558 158 C610 98 690 110 718 166" fill="none" stroke-width="8"/>
-    <path d="M514 276 C578 230 646 232 714 276" fill="none" stroke-width="6"/>
-    <path d="M902 276 L970 126 L1050 276" fill="none" stroke-width="8"/>
-    <path d="M938 126 C1012 82 1092 108 1112 178" fill="none" stroke-width="8"/>
-    <path d="M108 612 C250 515 408 506 570 590 S880 682 1094 536" fill="none" stroke-width="8"/>
-    <path d="M318 548 l44 -28 l-12 50" fill="none" stroke-width="8"/>
-    <path d="M768 568 l64 -42 l-16 72" fill="none" stroke-width="8"/>
-  </g>
-  <g fill="#151821" font-family="Arial, sans-serif" font-weight="700" font-size="34">
-    <text x="76" y="110">1</text>
-    <text x="458" y="110">2</text>
-    <text x="840" y="110">3</text>
-    <text x="78" y="468">CAMERA PATH / ACTION BEATS</text>
-  </g>
-  <g fill="none" stroke="#c33d38" stroke-width="7" stroke-linecap="round">
-    <path d="M612 142 L704 98"/>
-    <path d="M704 98 l-24 -8"/>
-    <path d="M704 98 l-10 24"/>
-    <path d="M984 130 L1116 178"/>
-    <path d="M1116 178 l-28 6"/>
-    <path d="M1116 178 l-15 -26"/>
-  </g>
-</svg>`;
-
-const demoStoryboardUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(demoStoryboardSvg)}`;
-
-const analysisFile = {
-  source_type: "storyboard_image",
-  mission: "computer vision decomposition into editable vector assets",
-  image_size: { width: 1200, height: 760 },
-  panel_detection: [
-    { id: "panel_001", bbox: [54, 60, 328, 280], order: 1, confidence: 0.98 },
-    { id: "panel_002", bbox: [436, 60, 328, 280], order: 2, confidence: 0.97 },
-    { id: "panel_003", bbox: [818, 60, 328, 280], order: 3, confidence: 0.97 },
-    { id: "timeline_row", bbox: [54, 420, 1092, 250], order: 4, confidence: 0.94 }
-  ],
-  segmentation_masks: [
+const vectorsFile = {
+  scene_id: "orbital_witness_scene_03_atrium_breach",
+  units: "meters",
+  frame_rate: 24,
+  duration_seconds: 9,
+  coordinate_system: {
+    x: "screen left to right",
+    y: "floor to ceiling",
+    z: "camera depth"
+  },
+  source: {
+    type: "storyboard_image",
+    processing: [
+      "panel boundary detection",
+      "subject and prop segmentation",
+      "camera mark extraction",
+      "contour-to-vector conversion"
+    ]
+  },
+  environment: {
+    location: "Eos Crown glass atrium",
+    lighting: ["blue service path", "gold orbital sunset", "red drone scan cone"],
+    gravity_event: { start: 5.4, end: 6.8, intensity: 0.62 }
+  },
+  objects: [
     {
-      id: "character_shape_panel_001",
-      class: "character_sketch",
-      panel_id: "panel_001",
-      contour_points: [[160, 268], [210, 155], [266, 268], [215, 125]],
-      vector_path_id: "character_001"
+      id: "mara_voss",
+      type: "human",
+      description: "graphite repair suit, cracked amber visor",
+      path: [
+        { t: 0, position: [-4.8, 0, 2.4], rotation: [0, 18, 0] },
+        { t: 2.2, position: [-2.2, 0, 1.6], rotation: [0, 34, 0] },
+        { t: 4.8, position: [-1.4, 0, 0.8], rotation: [0, 82, 0] },
+        { t: 6.7, position: [1.2, 1.1, -0.5], rotation: [8, 101, -12] },
+        { t: 9.0, position: [3.6, 0.35, -1.8], rotation: [0, 126, 0] }
+      ]
     },
     {
-      id: "camera_arrow_panel_002",
-      class: "camera_direction",
-      panel_id: "panel_002",
-      contour_points: [[612, 142], [704, 98], [694, 122], [680, 90]],
-      vector_path_id: "camera_arrow_002"
+      id: "sentinel_unit_6",
+      type: "security_drone",
+      description: "matte white drone, red twin sensor slits, stabilizer ring",
+      path: [
+        { t: 0, position: [5.1, 5.4, 1.2], rotation: [0, -42, 0] },
+        { t: 2.8, position: [3.7, 3.4, 0.6], rotation: [0, -78, 0] },
+        { t: 5.6, position: [2.4, 2.1, 0.2], rotation: [0, -96, 0] },
+        { t: 9.0, position: [1.8, 2.0, -0.3], rotation: [0, -112, 0] }
+      ],
+      emitted_volume: {
+        id: "red_scan_cone",
+        shape: "cone",
+        radius_meters: 3.2,
+        sweep_degrees: 54,
+        active_time: [3.1, 7.4]
+      }
     },
     {
-      id: "action_path_timeline",
-      class: "motion_path",
-      panel_id: "timeline_row",
-      contour_points: [[108, 612], [318, 548], [570, 590], [832, 526], [1094, 536]],
-      vector_path_id: "motion_path_001"
+      id: "climate_control_elevator_rail",
+      type: "set_piece",
+      position: [3.9, 0.4, -1.9],
+      scale: [0.3, 2.8, 0.3]
     }
   ],
-  vectorization: {
-    method: "mask contours simplified with bezier fitting",
-    coordinate_space: "normalized per panel plus full-board SVG coordinates",
-    outputs: ["storyboard_analysis.json", "storyboard_vectors.svg"]
-  }
+  camera: [
+    {
+      t: [0, 3.2],
+      lens_mm: 28,
+      position: [-5.8, 3.2, 5.6],
+      target: [-1.7, 0.6, 0.9],
+      movement: "locked wide mezzanine angle"
+    },
+    {
+      t: [3.2, 6.0],
+      lens_mm: 40,
+      position: [-2.4, 1.1, 3.4],
+      target: [0.4, 0.7, 0.1],
+      movement_vectors: [
+        { axis: "z", value_per_second: -0.48 },
+        { axis: "y", value_per_second: -0.12 }
+      ]
+    },
+    {
+      t: [6.0, 9.0],
+      lens_mm: 35,
+      position: [0.2, 0.65, 2.0],
+      target: [3.4, 0.5, -1.7],
+      movement_vectors: [
+        { axis: "x", value_per_second: 0.92 },
+        { axis: "z", value_per_second: -0.74 },
+        { axis: "roll", value_degrees: -7 }
+      ]
+    }
+  ]
 };
 
-const vectorSvgFile = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
-  <g id="detected-panels" fill="none" stroke="#69d391" stroke-width="5">
-    <rect id="panel_001" x="54" y="60" width="328" height="280"/>
-    <rect id="panel_002" x="436" y="60" width="328" height="280"/>
-    <rect id="panel_003" x="818" y="60" width="328" height="280"/>
-    <rect id="timeline_row" x="54" y="420" width="1092" height="250"/>
-  </g>
-  <g id="segmented-subjects" fill="none" stroke="#79a7ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-    <path id="character_001" d="M160 268 L210 155 L266 268 M184 138 C206 106 244 107 264 138"/>
-    <path id="character_002" d="M492 286 L588 142 L694 286 M558 158 C610 98 690 110 718 166"/>
-    <path id="character_003" d="M902 276 L970 126 L1050 276 M938 126 C1012 82 1092 108 1112 178"/>
-  </g>
-  <g id="camera-and-motion-vectors" fill="none" stroke="#f2b950" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-    <path id="camera_arrow_002" d="M612 142 L704 98 M704 98 L680 90 M704 98 L694 122"/>
-    <path id="camera_arrow_003" d="M984 130 L1116 178 M1116 178 L1088 184 M1116 178 L1101 152"/>
-    <path id="motion_path_001" d="M108 612 C250 515 408 506 570 590 S880 682 1094 536"/>
-  </g>
-</svg>`;
+const promptFile = `Generate a cinematic 9-second sci-fi thriller video from this scene package.
+
+Scene: Mara Voss crosses the Eos Crown orbital hotel atrium during orbital sunset. The room is a vast curved glass atrium overlooking Earth, with blue service lights on the floor, gold sunlight reflections, and polished glass surfaces that mirror movement.
+
+Character: Mara Voss wears a graphite maintenance repair suit and a cracked amber helmet visor. She moves carefully at first, hides behind a sculpture column, then kicks into a low-gravity glide toward the climate-control elevator rail.
+
+Threat: Sentinel Unit 6 is a matte white hovering security drone with twin red sensor slits and a stabilizer ring. It descends from an upper-right balcony and projects a red scan cone across the floor.
+
+Camera: Begin with a locked wide mezzanine shot. At 3 seconds, move into a smooth low dolly push. At 6 seconds, add a slight clockwise roll as artificial gravity flickers and Mara glides through the scan gap. Tense, precise, no handheld shake.
+
+Visual style: high-end cinematic previs, realistic materials, cool blue and warm gold contrast, crisp reflections, volumetric red scan light, 24 fps, 2.39:1 aspect ratio.`;
 
 const storyboardPreview = document.querySelector("#storyboardPreview");
 const storyboardFile = document.querySelector("#storyboardFile");
-const loadStoryboard = document.querySelector("#loadStoryboard");
 const analyzeButton = document.querySelector("#analyzeButton");
 const generateButton = document.querySelector("#generateButton");
 const outputGrid = document.querySelector("#outputGrid");
-const analysisOutput = document.querySelector("#analysisOutput");
-const svgOutput = document.querySelector("#svgOutput");
+const vectorOutput = document.querySelector("#vectorOutput");
+const promptOutput = document.querySelector("#promptOutput");
 const progressBar = document.querySelector("#progressBar");
 const statusPill = document.querySelector("#statusPill");
 
 function setStatus(text) {
   statusPill.lastChild.textContent = ` ${text}`;
-}
-
-function loadDemoStoryboard() {
-  storyboardPreview.src = demoStoryboardUrl;
-  setStatus("Demo storyboard image loaded");
 }
 
 function downloadFile(filename, content, type) {
@@ -127,35 +129,31 @@ function downloadFile(filename, content, type) {
 }
 
 function runAnalysis() {
-  if (!storyboardPreview.getAttribute("src")) {
-    loadDemoStoryboard();
-  }
-
   outputGrid.hidden = true;
-  progressBar.style.width = "16%";
+  progressBar.style.width = "18%";
   setStatus("Detecting storyboard panels");
   generateButton.disabled = true;
   analyzeButton.disabled = true;
 
   window.setTimeout(() => {
-    progressBar.style.width = "48%";
-    setStatus("Segmenting subjects and camera marks");
-  }, 420);
+    progressBar.style.width = "58%";
+    setStatus("Extracting motion vectors");
+  }, 450);
 
   window.setTimeout(() => {
-    progressBar.style.width = "78%";
-    setStatus("Tracing masks into SVG paths");
-  }, 900);
+    progressBar.style.width = "86%";
+    setStatus("Composing video prompt");
+  }, 950);
 
   window.setTimeout(() => {
-    analysisOutput.textContent = JSON.stringify(analysisFile, null, 2);
-    svgOutput.textContent = vectorSvgFile;
+    vectorOutput.textContent = JSON.stringify(vectorsFile, null, 2);
+    promptOutput.textContent = promptFile;
     outputGrid.hidden = false;
     progressBar.style.width = "100%";
-    setStatus("Vector package ready");
+    setStatus("Video AI package ready");
     generateButton.disabled = false;
     analyzeButton.disabled = false;
-  }, 1350);
+  }, 1450);
 }
 
 storyboardFile.addEventListener("change", () => {
@@ -171,18 +169,15 @@ storyboardFile.addEventListener("change", () => {
   setStatus(`${file.name} loaded`);
 });
 
-loadStoryboard.addEventListener("click", loadDemoStoryboard);
 analyzeButton.addEventListener("click", runAnalysis);
 generateButton.addEventListener("click", runAnalysis);
 
 document.querySelectorAll(".download-button").forEach((button) => {
   button.addEventListener("click", () => {
-    if (button.dataset.file === "analysis") {
-      downloadFile("storyboard_analysis.json", JSON.stringify(analysisFile, null, 2), "application/json");
+    if (button.dataset.file === "vectors") {
+      downloadFile("scene_vectors.json", JSON.stringify(vectorsFile, null, 2), "application/json");
     } else {
-      downloadFile("storyboard_vectors.svg", vectorSvgFile, "image/svg+xml");
+      downloadFile("video_prompt.txt", promptFile, "text/plain");
     }
   });
 });
-
-loadDemoStoryboard();

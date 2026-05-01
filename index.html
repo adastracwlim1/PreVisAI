@@ -24,11 +24,8 @@
           <div class="panel-head">
             <div>
               <h2>Storyboard Source</h2>
-              <p>Upload a board image or load the demo file</p>
+              <p>Upload a board image file</p>
             </div>
-            <button class="icon-button" id="loadStoryboard" aria-label="Load demo storyboard image" title="Load demo storyboard image">
-              <span aria-hidden="true">+</span>
-            </button>
           </div>
 
           <label class="upload-drop" for="storyboardFile">
@@ -40,15 +37,6 @@
 
           <div class="preview-stage" aria-label="storyboard image preview">
             <img id="storyboardPreview" alt="Storyboard image preview" />
-            <div class="vision-overlay" aria-hidden="true">
-              <span class="panel-box panel-a"></span>
-              <span class="panel-box panel-b"></span>
-              <span class="panel-box panel-c"></span>
-              <span class="vector-line line-a"></span>
-              <span class="vector-line line-b"></span>
-              <span class="subject-mask mask-a"></span>
-              <span class="subject-mask mask-b"></span>
-            </div>
           </div>
 
           <div class="metadata-grid">
@@ -124,21 +112,21 @@
               <div class="file-head">
                 <div>
                   <span class="file-type">JSON</span>
-                  <h3>storyboard_analysis.json</h3>
+                  <h3>scene_vectors.json</h3>
                 </div>
-                <button class="download-button" data-file="analysis">Download</button>
+                <button class="download-button" data-file="vectors">Download</button>
               </div>
-              <pre id="analysisOutput"></pre>
+              <pre id="vectorOutput"></pre>
             </article>
             <article class="output-card">
               <div class="file-head">
                 <div>
-                  <span class="file-type">SVG</span>
-                  <h3>storyboard_vectors.svg</h3>
+                  <span class="file-type">TXT</span>
+                  <h3>video_prompt.txt</h3>
                 </div>
-                <button class="download-button" data-file="svg">Download</button>
+                <button class="download-button" data-file="prompt">Download</button>
               </div>
-              <pre id="svgOutput"></pre>
+              <pre id="promptOutput"></pre>
             </article>
           </div>
         </section>
