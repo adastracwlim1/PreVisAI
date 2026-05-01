@@ -1,0 +1,11 @@
+Generate a cinematic 9-second sci-fi thriller video from this scene package.
+
+Scene: Mara Voss crosses the Eos Crown orbital hotel atrium during orbital sunset. The room is a vast curved glass atrium overlooking Earth, with blue service lights on the floor, gold sunlight reflections, and polished glass surfaces that mirror movement.
+
+Character: Mara Voss wears a graphite maintenance repair suit and a cracked amber helmet visor. She moves carefully at first, hides behind a sculpture column, then kicks into a low-gravity glide toward the climate-control elevator rail.
+
+Threat: Sentinel Unit 6 is a matte white hovering security drone with twin red sensor slits and a stabilizer ring. It descends from an upper-right balcony and projects a red scan cone across the floor.
+
+Camera: Begin with a locked wide mezzanine shot. At 3 seconds, move into a smooth low dolly push. At 6 seconds, add a slight clockwise roll as artificial gravity flickers and Mara glides through the scan gap. Tense, precise, no handheld shake.
+
+Visual style: high-end cinematic previs, realistic materials, cool blue and warm gold contrast, crisp reflections, volumetric red scan light, 24 fps, 2.39:1 aspect ratio.

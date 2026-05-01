@@ -1,0 +1,30 @@
+PROJECT: ORBITAL WITNESS
+
+Premise: In 2089, a maintenance engineer named Mara Voss discovers that the luxury orbital hotel Eos Crown is hiding a weapons test inside its climate-control core.
+
+World rules:
+- Artificial gravity flickers when the station changes orbit.
+- Security drones track heat signatures, not faces.
+- Blue service lights mark safe maintenance paths.
+- The exterior glass atrium faces Earth and reflects every moving body.
+
+Characters:
+- Mara Voss: precise, exhausted, wearing a graphite repair suit with a cracked amber helmet visor.
+- Ilya Ren: station concierge, secretly helping Mara, communicates through short audio pings.
+- Sentinel Unit 6: matte white security drone with twin red sensor slits and a hovering stabilizer ring.
+
+Scene 01: Docking Spine
+Mara crawls through the docking spine while tourist shuttles detach from the hotel. The corridor is cramped, noisy, and lit by amber warning strips. She overhears a corrupted maintenance call that mentions the climate-control core.
+
+Scene 02: Service Gallery
+Mara reaches the service gallery above the hotel ballroom. She watches guests dance beneath a glass floor while Ilya sends three warning pings through her headset. A patrol drone passes below without noticing her heat signature.
+
+Scene 03: Atrium Breach
+Mara crosses the empty glass atrium to reach the climate-control elevator before Sentinel Unit 6 scans the floor. The hotel is in orbital sunset, so Earthlight washes the scene in blue and gold.
+
+Mara enters from camera-left, staying close to a line of blue service lights. Earth fills the background through the curved glass wall. Sentinel Unit 6 descends from the upper right balcony, projecting a red scan cone across the floor. Mara freezes behind a sculpture column, then kicks off during a gravity flicker and glides through the scan gap toward the elevator rail.
+
+Camera intent: tense, precise, no handheld shake. Start with a locked wide composition, then transition into a smooth low dolly push with a slight roll during the gravity flicker.
+
+Scene 04: Core Door
+The elevator opens onto a frozen maintenance deck. Mara finds the climate-control door sealed from the inside and realizes the weapons test has already started. The station begins venting heat toward the night side of Earth.

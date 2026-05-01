@@ -7,129 +7,61 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="app-shell">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Storyboard image to vector previs</p>
-          <h1>previs-AI</h1>
-        </div>
-        <div class="status-pill" id="statusPill">
-          <span></span>
-          Ready for storyboard image
-        </div>
+    <main>
+      <header>
+        <h1>previs-AI</h1>
+        <p id="statusPill"><span></span>Ready for storyboard image</p>
       </header>
 
-      <section class="workspace" aria-label="previs-AI computer vision workspace">
-        <aside class="project-panel">
-          <div class="panel-head">
-            <div>
-              <h2>Storyboard Source</h2>
-              <p>Upload a board image file</p>
-            </div>
+      <section aria-label="storyboard and scenario">
+        <div class="source-grid">
+          <div>
+            <h2>Storyboard Source</h2>
+            <label class="upload-drop" for="storyboardFile">
+              <input id="storyboardFile" type="file" accept="image/*" />
+              <img id="storyboardPreview" alt="Storyboard image preview" />
+              <span class="upload-prompt">
+                <strong>Upload storyboard image</strong>
+                <small>PNG, JPG, or WebP</small>
+              </span>
+            </label>
           </div>
 
-          <label class="upload-drop" for="storyboardFile">
-            <input id="storyboardFile" type="file" accept="image/*" />
-            <span class="upload-icon" aria-hidden="true">IMG</span>
-            <strong>Storyboard image file</strong>
-            <small>PNG, JPG, or WebP with drawn panels, notes, arrows, and camera marks</small>
-          </label>
-
-          <div class="preview-stage" aria-label="storyboard image preview">
-            <img id="storyboardPreview" alt="Storyboard image preview" />
-          </div>
-
-          <div class="metadata-grid">
-            <div>
-              <strong>Input</strong>
-              <span>Image file</span>
-            </div>
-            <div>
-              <strong>Vision</strong>
-              <span>Segment + detect</span>
-            </div>
-            <div>
-              <strong>Geometry</strong>
-              <span>Contours to SVG</span>
-            </div>
-            <div>
-              <strong>Output</strong>
-              <span>Vector package</span>
+          <div>
+            <h2>Input Scenario</h2>
+            <div class="scenario-window" id="scenarioWindow" aria-label="input scenario">
+              <pre id="scenarioText">Loading scenario...</pre>
             </div>
           </div>
-        </aside>
+        </div>
+      </section>
 
-        <section class="main-panel">
-          <div class="storyboard-strip" aria-label="computer vision pipeline">
-            <article class="frame active">
-              <div class="frame-art frame-one"></div>
-              <span>Panel detection</span>
-            </article>
-            <article class="frame">
-              <div class="frame-art frame-two"></div>
-              <span>Mask extraction</span>
-            </article>
-            <article class="frame">
-              <div class="frame-art frame-three"></div>
-              <span>Vector tracing</span>
-            </article>
-          </div>
+      <section aria-label="storyboard actions">
+        <h2>Process</h2>
+        <div class="action-row">
+          <button id="analyzeButton">Analyze board</button>
+          <button id="generateButton">Export vectors</button>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <span id="progressBar"></span>
+        </div>
+      </section>
 
-          <div class="input-card">
-            <div class="panel-head">
-              <div>
-                <h2>Computer Vision Mission</h2>
-                <p>Dissect the storyboard image into panels, subjects, camera marks, and reusable vectors</p>
-              </div>
-              <button id="analyzeButton">Analyze board</button>
-            </div>
-
-            <div class="mission-grid">
-              <article>
-                <strong>1</strong>
-                <span>Find panel boundaries and reading order</span>
-              </article>
-              <article>
-                <strong>2</strong>
-                <span>Segment characters, props, text blocks, arrows, and camera shapes</span>
-              </article>
-              <article>
-                <strong>3</strong>
-                <span>Trace masks into clean SVG paths and normalized coordinates</span>
-              </article>
-            </div>
-
-            <div class="action-row">
-              <div class="progress-track" aria-hidden="true">
-                <span id="progressBar"></span>
-              </div>
-              <button class="primary" id="generateButton">Export vectors</button>
-            </div>
-          </div>
-
-          <div class="output-grid" id="outputGrid" hidden>
-            <article class="output-card">
-              <div class="file-head">
-                <div>
-                  <span class="file-type">JSON</span>
-                  <h3>scene_vectors.json</h3>
-                </div>
-                <button class="download-button" data-file="vectors">Download</button>
-              </div>
-              <pre id="vectorOutput"></pre>
-            </article>
-            <article class="output-card">
-              <div class="file-head">
-                <div>
-                  <span class="file-type">TXT</span>
-                  <h3>video_prompt.txt</h3>
-                </div>
-                <button class="download-button" data-file="prompt">Download</button>
-              </div>
-              <pre id="promptOutput"></pre>
-            </article>
-          </div>
-        </section>
+      <section class="output-grid" id="outputGrid" hidden aria-label="outputs">
+        <article>
+          <header>
+            <h3>scene_vectors.json</h3>
+            <button data-file="vectors">Download</button>
+          </header>
+          <pre id="vectorOutput"></pre>
+        </article>
+        <article>
+          <header>
+            <h3>video_prompt.txt</h3>
+            <button data-file="prompt">Download</button>
+          </header>
+          <pre id="promptOutput"></pre>
+        </article>
       </section>
     </main>
 
