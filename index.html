@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>previs-AI</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Scene-to-video previsualization</p>
+          <h1>previs-AI</h1>
+        </div>
+        <div class="status-pill" id="statusPill">
+          <span></span>
+          Ready for project input
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="previs-AI demo workspace">
+        <aside class="project-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Project Scenario</h2>
+              <p>Complete film context</p>
+            </div>
+            <button class="icon-button" id="loadScenario" aria-label="Load demo scenario" title="Load demo scenario">
+              <span aria-hidden="true">+</span>
+            </button>
+          </div>
+          <textarea id="scenarioInput" spellcheck="false" placeholder="Load or paste the entire project scenario..."></textarea>
+          <div class="metadata-grid">
+            <div>
+              <strong>Genre</strong>
+              <span>Sci-fi thriller</span>
+            </div>
+            <div>
+              <strong>Runtime</strong>
+              <span>12 min</span>
+            </div>
+            <div>
+              <strong>Scene</strong>
+              <span>03 / Atrium breach</span>
+            </div>
+            <div>
+              <strong>Output</strong>
+              <span>Video AI package</span>
+            </div>
+          </div>
+        </aside>
+
+        <section class="main-panel">
+          <div class="storyboard-strip" aria-label="storyboard frames">
+            <article class="frame active">
+              <div class="frame-art frame-one"></div>
+              <span>Wide reveal</span>
+            </article>
+            <article class="frame">
+              <div class="frame-art frame-two"></div>
+              <span>Subject move</span>
+            </article>
+            <article class="frame">
+              <div class="frame-art frame-three"></div>
+              <span>Camera push</span>
+            </article>
+          </div>
+
+          <div class="input-card">
+            <div class="panel-head">
+              <div>
+                <h2>Storyboard For One Scene</h2>
+                <p>Shot beats, blocking, camera intent</p>
+              </div>
+              <button id="loadStoryboard">Use demo board</button>
+            </div>
+            <textarea id="storyboardInput" spellcheck="false" placeholder="Paste storyboard notes for the scene..."></textarea>
+            <div class="action-row">
+              <div class="progress-track" aria-hidden="true">
+                <span id="progressBar"></span>
+              </div>
+              <button class="primary" id="generateButton">Convert scene</button>
+            </div>
+          </div>
+
+          <div class="output-grid" id="outputGrid" hidden>
+            <article class="output-card">
+              <div class="file-head">
+                <div>
+                  <span class="file-type">JSON</span>
+                  <h3>scene_vectors.json</h3>
+                </div>
+                <button class="download-button" data-file="vectors">Download</button>
+              </div>
+              <pre id="vectorOutput"></pre>
+            </article>
+            <article class="output-card">
+              <div class="file-head">
+                <div>
+                  <span class="file-type">TXT</span>
+                  <h3>video_prompt.txt</h3>
+                </div>
+                <button class="download-button" data-file="prompt">Download</button>
+              </div>
+              <pre id="promptOutput"></pre>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
