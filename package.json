@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "claude-code": "^1.0.0",
     "rg": "^0.0.2"
   }
 }

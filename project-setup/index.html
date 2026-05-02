@@ -3,51 +3,186 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>previs-AI Projects</title>
+    <title>PreVisAI — From Script to Shot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    />
     <link rel="stylesheet" href="./project-setup.css" />
   </head>
   <body>
+    <div class="bg-glow" aria-hidden="true"></div>
+
     <header class="top-bar">
-      <a class="brand" href="./index.html" aria-label="previs-AI home">
-        <span class="logo-placeholder" aria-hidden="true"></span>
-        <span>previs-AI</span>
-      </a>
-      <div class="top-actions">
-        <button type="button">Help</button>
-        <button class="profile-placeholder" type="button" aria-label="User profile">User</button>
+      <div class="deck-tag">
+        <a class="brand-mini" href="./index.html" aria-label="PreVisAI home">
+          <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="2" y="32" width="18" height="4" rx="2" fill="currentColor" />
+            <rect x="2" y="42" width="18" height="4" rx="2" fill="currentColor" />
+            <path
+              d="M22 50 C22 32, 34 22, 56 12 C50 30, 42 44, 28 56 Z"
+              fill="currentColor"
+            />
+            <circle cx="34" cy="36" r="2.4" fill="#05060a" />
+            <circle cx="42" cy="30" r="2.4" fill="#05060a" />
+          </svg>
+          <span>PreVisAI</span>
+        </a>
+        <span class="tag-sep">/</span>
+        <span class="tag-text">AI PRE-PRODUCTION SUITE &middot; SEED PITCH &middot; 2026</span>
       </div>
+      <div class="deck-page">01 / 09</div>
     </header>
 
-    <main class="project-page">
-      <aside class="project-list" aria-label="projects">
-        <h1>previs-AI</h1>
-        <button class="project-item" id="newProjectButton">New Project</button>
-        <div id="projectListItems"></div>
-      </aside>
+    <main class="page">
+      <section class="hero">
+        <div class="brand-block">
+          <svg class="brand-mark big" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="2" y="32" width="18" height="4" rx="2" fill="currentColor" />
+            <rect x="2" y="42" width="18" height="4" rx="2" fill="currentColor" />
+            <path
+              d="M22 50 C22 32, 34 22, 56 12 C50 30, 42 44, 28 56 Z"
+              fill="currentColor"
+            />
+            <circle cx="34" cy="36" r="2.6" fill="#05060a" />
+            <circle cx="42" cy="30" r="2.6" fill="#05060a" />
+          </svg>
+          <span class="brand-word">PreVisAI</span>
+        </div>
 
-      <section class="project-placeholder" aria-label="project setup">
-        <h2>Create or select a project</h2>
-        <p>Upload the overarching scenario before moving into storyboard matching.</p>
+        <div class="hero-divider" aria-hidden="true"></div>
+
+        <div class="hero-grid">
+          <div class="hero-headline">
+            <h1>
+              From Script<br />
+              to <span class="accent-shot">Shot.</span>
+            </h1>
+            <p class="hero-sub">
+              PreVisAI converts your screenplay or storyboard into generation-ready
+              prompt packages for Sora, Runway, Higgsfield, and Kling — in seconds.
+            </p>
+
+            <div class="supported">
+              <span class="supported-label">
+                <span class="dot"></span> SUPPORTED MODELS
+              </span>
+              <ul class="model-list">
+                <li>Sora</li>
+                <li>Runway</li>
+                <li>Higgsfield</li>
+                <li>Kling</li>
+              </ul>
+            </div>
+          </div>
+
+          <aside class="hero-meta" aria-label="deck metadata">
+            <div class="meta-row">
+              <span class="meta-label">CONFIDENTIAL</span>
+              <span class="meta-value">For investor review only</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">ROUND</span>
+              <span class="meta-value">Seed — $1.5M</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">DATE</span>
+              <span class="meta-value">May 2026</span>
+            </div>
+          </aside>
+        </div>
+
+        <nav class="hero-actions" aria-label="primary actions">
+          <button class="pill" type="button">
+            <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M3 2 L9 6 L3 10 Z" fill="currentColor" />
+            </svg>
+            Watch demo
+          </button>
+          <button class="pill" type="button">Request access</button>
+          <button class="pill primary" id="newProjectButton" type="button">
+            Get started <span aria-hidden="true">→</span>
+          </button>
+          <button class="pill" type="button">Docs</button>
+        </nav>
+      </section>
+
+      <section class="projects" aria-label="projects">
+        <div class="section-head">
+          <span class="eyebrow">Project library</span>
+          <h2>Your projects</h2>
+          <p class="section-sub">
+            Each project holds an overarching scenario. Storyboards parse against this
+            scenario to produce a prompt and a motion-vector list.
+          </p>
+        </div>
+
+        <div class="project-grid" id="projectListItems"></div>
+
+        <button class="new-project-card" id="newProjectCard" type="button">
+          <span class="plus" aria-hidden="true">+</span>
+          <span class="new-project-text">
+            <strong>New project</strong>
+            <small>Upload an overarching scenario</small>
+          </span>
+        </button>
       </section>
     </main>
 
-    <dialog id="scenarioDialog">
-      <form method="dialog">
-        <header>
-          <h2 id="dialogTitle">New Project</h2>
-          <button value="cancel" aria-label="Close">Close</button>
+    <dialog id="scenarioDialog" class="dialog">
+      <form method="dialog" class="dialog-form">
+        <header class="dialog-head">
+          <div>
+            <span class="eyebrow">Project</span>
+            <h2 id="dialogTitle">New Project</h2>
+          </div>
+          <button class="dialog-close" id="dialogCloseButton" type="button" aria-label="Close">
+            ×
+          </button>
         </header>
 
-        <label for="projectName">Project name</label>
-        <input id="projectName" name="projectName" type="text" />
+        <label class="field">
+          <span class="field-label">Project name</span>
+          <input
+            id="projectName"
+            name="projectName"
+            type="text"
+            placeholder="e.g. Orbital Witness"
+            autocomplete="off"
+          />
+        </label>
 
-        <label for="scenarioFile">Scenario file</label>
-        <input id="scenarioFile" name="scenarioFile" type="file" accept=".txt,text/plain" />
+        <label class="field file-field">
+          <span class="field-label">Scenario file</span>
+          <span class="file-control">
+            <input
+              id="scenarioFile"
+              name="scenarioFile"
+              type="file"
+              accept=".txt,text/plain"
+            />
+            <span class="file-control-label">Choose .txt scenario</span>
+            <span class="file-control-hint">Plain-text scene rules &amp; world bible</span>
+          </span>
+        </label>
 
-        <pre id="scenarioPreview">Upload a .txt scenario file.</pre>
+        <div class="preview-card">
+          <span class="preview-label">SCENARIO PREVIEW</span>
+          <pre id="scenarioPreview">Upload a .txt scenario file.</pre>
+        </div>
 
-        <div class="action-row">
-          <button id="continueButton" value="default" disabled>Continue to storyboard page</button>
+        <div class="dialog-actions">
+          <button
+            class="pill primary"
+            id="continueButton"
+            value="default"
+            type="submit"
+            disabled
+          >
+            Continue to storyboard <span aria-hidden="true">→</span>
+          </button>
         </div>
       </form>
     </dialog>

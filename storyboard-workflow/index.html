@@ -3,84 +3,178 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>previs-AI</title>
+    <title>PreVisAI — Storyboard workflow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
     <link rel="stylesheet" href="./storyboard-workflow.css" />
   </head>
   <body>
+    <div class="bg-glow" aria-hidden="true"></div>
+
     <header class="top-bar">
-      <a class="brand" href="../project-setup/index.html" aria-label="previs-AI home">
-        <span class="logo-placeholder" aria-hidden="true"></span>
-        <span>previs-AI</span>
+      <a class="brand-mini" href="../project-setup/index.html" aria-label="PreVisAI home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="2" y="32" width="18" height="4" rx="2" fill="currentColor" />
+          <rect x="2" y="42" width="18" height="4" rx="2" fill="currentColor" />
+          <path
+            d="M22 50 C22 32, 34 22, 56 12 C50 30, 42 44, 28 56 Z"
+            fill="currentColor"
+          />
+          <circle cx="34" cy="36" r="2.4" fill="#05060a" />
+          <circle cx="42" cy="30" r="2.4" fill="#05060a" />
+        </svg>
+        <span>PreVisAI</span>
       </a>
+
+      <nav class="top-nav">
+        <span class="crumb">Project library</span>
+        <span class="crumb-sep">/</span>
+        <span class="crumb active" id="projectCrumb">Storyboard workflow</span>
+      </nav>
+
       <div class="top-actions">
-        <button type="button">Help</button>
-        <button class="profile-placeholder" type="button" aria-label="User profile">User</button>
+        <button class="pill ghost" type="button">Help</button>
+        <button class="pill ghost user-pill" type="button" aria-label="User profile">
+          <span class="user-dot" aria-hidden="true"></span>
+          User
+        </button>
       </div>
     </header>
 
-    <aside class="project-list" aria-label="projects">
-      <h1>previs-AI</h1>
-      <button class="project-item" id="newProjectButton">New Project</button>
-      <div id="projectListItems"></div>
-    </aside>
+    <div class="layout">
+      <aside class="sidebar" aria-label="projects">
+        <div class="sidebar-head">
+          <span class="eyebrow">Projects</span>
+          <button class="pill primary small" id="newProjectButton" type="button">
+            <span aria-hidden="true">+</span> New
+          </button>
+        </div>
+        <div class="project-list" id="projectListItems"></div>
+      </aside>
 
-    <main class="workflow-page">
-      <header>
-        <h1>previs-AI</h1>
-        <p id="statusPill"><span></span>Ready for storyboard image</p>
-      </header>
+      <main class="workflow">
+        <header class="workflow-head">
+          <span class="eyebrow">Storyboard workflow</span>
+          <h1 id="projectTitle">Storyboard → Prompt &amp; Vectors</h1>
+          <p class="workflow-sub">
+            Upload a storyboard panel. PreVisAI matches it against your scenario,
+            extracts motion vectors, and composes a generation-ready video prompt.
+          </p>
+          <div class="status-pill" id="statusPill">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span class="status-text">Ready for storyboard image</span>
+          </div>
+        </header>
 
-      <section aria-label="storyboard and scenario">
-        <div class="source-grid">
-          <div>
-            <h2>Storyboard Source</h2>
+        <section class="card-grid" aria-label="storyboard and scenario">
+          <article class="glass-card">
+            <header class="card-head">
+              <span class="eyebrow">Storyboard source</span>
+              <h2>Panel input</h2>
+              <p>Drop a storyboard image. PNG, JPG, or WebP.</p>
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 16l4-4 3 3 5-6 4 6"
+                    stroke="white"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle cx="9" cy="8" r="1.4" fill="white" />
+                </svg>
+              </span>
+            </header>
             <label class="upload-drop" for="storyboardFile">
               <input id="storyboardFile" type="file" accept="image/*" />
               <img id="storyboardPreview" alt="Storyboard image preview" />
               <span class="upload-prompt">
+                <span class="upload-icon" aria-hidden="true">+</span>
                 <strong>Upload storyboard image</strong>
-                <small>PNG, JPG, or WebP</small>
+                <small>PNG, JPG, or WebP — drag &amp; drop supported</small>
               </span>
             </label>
-          </div>
+          </article>
 
-          <div>
-            <h2>Input Scenario</h2>
+          <article class="glass-card">
+            <header class="card-head">
+              <span class="eyebrow">Scene DNA</span>
+              <h2>Input scenario</h2>
+              <p>Tone, camera, lighting, and continuity cues for the project.</p>
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 5h14M5 10h14M5 15h9M5 20h6"
+                    stroke="white"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+            </header>
             <div class="scenario-window" id="scenarioWindow" aria-label="input scenario">
               <pre id="scenarioText">Loading scenario...</pre>
             </div>
+          </article>
+        </section>
+
+        <section class="process-row" aria-label="storyboard actions">
+          <div class="process-info">
+            <span class="eyebrow">Process</span>
+            <h2>Run the pipeline</h2>
+            <p>
+              Detect panels, extract motion vectors, and compose a video prompt — in one
+              pass.
+            </p>
           </div>
-        </div>
-      </section>
+          <div class="process-controls">
+            <div class="action-row">
+              <button class="pill primary" id="analyzeButton" type="button">
+                <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M3 2 L9 6 L3 10 Z" fill="currentColor" />
+                </svg>
+                Analyze board
+              </button>
+              <button class="pill" id="generateButton" type="button">
+                Export vectors
+              </button>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <span id="progressBar"></span>
+            </div>
+          </div>
+        </section>
 
-      <section aria-label="storyboard actions">
-        <h2>Process</h2>
-        <div class="action-row">
-          <button id="analyzeButton">Analyze board</button>
-          <button id="generateButton">Export vectors</button>
-        </div>
-        <div class="progress-track" aria-hidden="true">
-          <span id="progressBar"></span>
-        </div>
-      </section>
-
-      <section class="output-grid" id="outputGrid" hidden aria-label="outputs">
-        <article>
-          <header>
-            <h3>scene_vectors.json</h3>
-            <button data-file="vectors">Download</button>
-          </header>
-          <pre id="vectorOutput"></pre>
-        </article>
-        <article>
-          <header>
-            <h3>video_prompt.txt</h3>
-            <button data-file="prompt">Download</button>
-          </header>
-          <pre id="promptOutput"></pre>
-        </article>
-      </section>
-    </main>
+        <section class="output-grid" id="outputGrid" hidden aria-label="outputs">
+          <article class="glass-card output-card">
+            <header class="card-head">
+              <span class="eyebrow">Motion</span>
+              <h3>scene_vectors.json</h3>
+              <p>Camera, subject, and prop motion vectors with timing.</p>
+              <button class="pill small" data-file="vectors" type="button">
+                Download
+              </button>
+            </header>
+            <pre id="vectorOutput"></pre>
+          </article>
+          <article class="glass-card output-card">
+            <header class="card-head">
+              <span class="eyebrow">Prompt</span>
+              <h3>video_prompt.txt</h3>
+              <p>Generation-ready prompt for Sora, Runway, Higgsfield, or Kling.</p>
+              <button class="pill small" data-file="prompt" type="button">
+                Download
+              </button>
+            </header>
+            <pre id="promptOutput"></pre>
+          </article>
+        </section>
+      </main>
+    </div>
 
     <script src="./storyboard-workflow.js"></script>
   </body>

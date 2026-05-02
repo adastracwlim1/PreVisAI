@@ -28,8 +28,11 @@ const vectorOutput = document.querySelector("#vectorOutput");
 const promptOutput = document.querySelector("#promptOutput");
 const progressBar = document.querySelector("#progressBar");
 const statusPill = document.querySelector("#statusPill");
+const statusText = statusPill.querySelector(".status-text");
 const newProjectButton = document.querySelector("#newProjectButton");
 const projectListItems = document.querySelector("#projectListItems");
+const projectTitle = document.querySelector("#projectTitle");
+const projectCrumb = document.querySelector("#projectCrumb");
 
 const defaultProjects = ["Orbital Witness", "Glass Desert", "Signal Room"];
 
@@ -46,6 +49,30 @@ function getProjects() {
   return savedProjects || defaultProjects;
 }
 
+function setActiveProject(name) {
+  if (!name) {
+    return;
+  }
+
+  sessionStorage.setItem("projectName", name);
+  if (projectTitle) {
+    projectTitle.textContent = name;
+  }
+  if (projectCrumb) {
+    projectCrumb.textContent = name;
+  }
+
+  projectListItems.querySelectorAll(".project-item").forEach((button) => {
+    const isActive = button.dataset.project === name;
+    button.classList.toggle("active", isActive);
+    if (isActive) {
+      button.setAttribute("aria-current", "true");
+    } else {
+      button.removeAttribute("aria-current");
+    }
+  });
+}
+
 function renderProjects() {
   projectListItems.innerHTML = "";
 
@@ -56,15 +83,24 @@ function renderProjects() {
     button.dataset.project = name;
     button.textContent = name;
     button.addEventListener("click", () => {
-      sessionStorage.setItem("projectName", name);
+      setActiveProject(name);
       setStatus(`${name} selected`);
     });
     projectListItems.append(button);
   });
+
+  const current = sessionStorage.getItem("projectName");
+  if (current) {
+    setActiveProject(current);
+  }
 }
 
-function setStatus(text) {
-  statusPill.lastChild.textContent = ` ${text}`;
+function setStatus(text, tone) {
+  statusText.textContent = text;
+  statusPill.classList.remove("busy", "ready");
+  if (tone === "busy" || tone === "ready") {
+    statusPill.classList.add(tone);
+  }
 }
 
 async function loadOutputFile(key) {
@@ -100,7 +136,8 @@ async function loadScenario() {
     throw new Error(`Could not load ${inputFiles.match}`);
   }
 
-  scenarioSource = sessionStorage.getItem("projectScenario") || await scenarioResponse.text();
+  scenarioSource =
+    sessionStorage.getItem("projectScenario") || (await scenarioResponse.text());
   scenarioMatch = await matchResponse.json();
   scenarioText.textContent = scenarioSource;
 }
@@ -164,7 +201,7 @@ function finishAnalysis() {
   promptOutput.textContent = loadedOutputs.prompt;
   outputGrid.hidden = false;
   progressBar.style.width = "100%";
-  setStatus("Video AI package ready");
+  setStatus("Video AI package ready", "ready");
   generateButton.disabled = false;
   analyzeButton.disabled = false;
 }
@@ -172,7 +209,7 @@ function finishAnalysis() {
 async function runAnalysis() {
   outputGrid.hidden = true;
   progressBar.style.width = "18%";
-  setStatus("Detecting storyboard panels");
+  setStatus("Detecting storyboard panels", "busy");
   generateButton.disabled = true;
   analyzeButton.disabled = true;
 
@@ -189,12 +226,12 @@ async function runAnalysis() {
 
   window.setTimeout(() => {
     progressBar.style.width = "58%";
-    setStatus("Extracting motion vectors");
+    setStatus("Extracting motion vectors", "busy");
   }, 450);
 
   window.setTimeout(() => {
     progressBar.style.width = "86%";
-    setStatus("Composing video prompt");
+    setStatus("Composing video prompt", "busy");
   }, 950);
 
   window.setTimeout(finishAnalysis, 1450);
@@ -211,7 +248,7 @@ storyboardFile.addEventListener("change", () => {
   uploadDrop.classList.add("has-image");
   outputGrid.hidden = true;
   progressBar.style.width = "0%";
-  setStatus(`Searching scenario for ${file.name}`);
+  setStatus(`Searching scenario for ${file.name}`, "busy");
   scenarioReady.then(highlightScenarioMatch);
 });
 

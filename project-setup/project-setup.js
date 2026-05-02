@@ -5,8 +5,17 @@ const scenarioFile = document.querySelector("#scenarioFile");
 const scenarioPreview = document.querySelector("#scenarioPreview");
 const continueButton = document.querySelector("#continueButton");
 const projectListItems = document.querySelector("#projectListItems");
+const newProjectButton = document.querySelector("#newProjectButton");
+const newProjectCard = document.querySelector("#newProjectCard");
+const dialogCloseButton = document.querySelector("#dialogCloseButton");
 
 const defaultProjects = ["Orbital Witness", "Glass Desert", "Signal Room"];
+
+const projectMeta = {
+  "Orbital Witness": "Sci-fi thriller · 4 scenes",
+  "Glass Desert": "Speculative drama · 3 scenes",
+  "Signal Room": "Espionage short · 2 scenes"
+};
 
 let scenarioText = "";
 
@@ -32,21 +41,43 @@ function renderProjects() {
   projectListItems.innerHTML = "";
 
   getProjects().forEach((name) => {
-    const button = document.createElement("button");
-    button.className = "project-item";
-    button.type = "button";
-    button.dataset.project = name;
-    button.textContent = name;
-    button.addEventListener("click", () => {
+    const card = document.createElement("button");
+    card.className = "project-card";
+    card.type = "button";
+    card.dataset.project = name;
+
+    const eyebrow = document.createElement("span");
+    eyebrow.className = "project-eyebrow";
+    eyebrow.textContent = "Project";
+
+    const title = document.createElement("span");
+    title.className = "project-title";
+    title.textContent = name;
+
+    const foot = document.createElement("span");
+    foot.className = "project-foot";
+
+    const meta = document.createElement("span");
+    meta.textContent = projectMeta[name] || "Scenario uploaded";
+
+    const arrow = document.createElement("span");
+    arrow.className = "project-arrow";
+    arrow.textContent = "→";
+
+    foot.append(meta, arrow);
+    card.append(eyebrow, title, foot);
+
+    card.addEventListener("click", () => {
       openScenarioDialog(name);
     });
-    projectListItems.append(button);
+
+    projectListItems.append(card);
   });
 }
 
 function openScenarioDialog(name = "") {
   scenarioText = "";
-  dialogTitle.textContent = name ? `Project: ${name}` : "New Project";
+  dialogTitle.textContent = name ? name : "New project";
   projectName.value = name;
   scenarioFile.value = "";
   scenarioPreview.textContent = "Upload a .txt scenario file.";
@@ -54,8 +85,16 @@ function openScenarioDialog(name = "") {
   dialog.showModal();
 }
 
-document.querySelector("#newProjectButton").addEventListener("click", () => {
+newProjectButton.addEventListener("click", () => {
   openScenarioDialog();
+});
+
+newProjectCard.addEventListener("click", () => {
+  openScenarioDialog();
+});
+
+dialogCloseButton.addEventListener("click", () => {
+  dialog.close("cancel");
 });
 
 scenarioFile.addEventListener("change", async () => {
