@@ -91,6 +91,7 @@ header {
 .brand-mini .brand-mark {
   width: 22px;
   height: 22px;
+  display: block;
   filter: drop-shadow(0 0 18px rgba(77, 125, 255, 0.4));
 }
 

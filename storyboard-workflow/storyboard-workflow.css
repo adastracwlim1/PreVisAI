@@ -89,6 +89,7 @@ body {
 .brand-mini .brand-mark {
   width: 24px;
   height: 24px;
+  display: block;
   filter: drop-shadow(0 0 14px rgba(77, 125, 255, 0.45));
 }
 

@@ -138,7 +138,7 @@ header {
 .brand-mark {
   width: 56px;
   height: 56px;
-  color: var(--text);
+  display: block;
   filter: drop-shadow(0 0 24px rgba(77, 125, 255, 0.4));
 }
 
